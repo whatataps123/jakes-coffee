@@ -1,0 +1,88 @@
+body {
+  background-color: #ffffcc;
+  color: #330000;
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  
+}
+
+header {
+  background-color: #ccaa66;
+  text-align: center;
+  border-bottom: solid 2px #000;
+  border-top: solid 2px #000;
+  border-style: solid;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  background-color: #E8D882;
+  gap: 10px;
+  padding:10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #330000;
+  padding: 10px;
+  background-color: #e8d882;
+  border: solid 1px #000;
+  border-radius: 5px;
+  text-align: center;
+}
+
+nav a:hover {
+  background-color: #ccaa66;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  border: 2px solid #000;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+section {
+  padding: 10px;
+  background-color: #f1e8b0;
+  flex-grow: 1;
+}
+
+#CoffeePic {
+  float: right;
+  margin: 0 0 10px 10px;
+}
+
+footer {
+  background-color: #ccaa66;
+  border-top: solid 2px #000;
+  height: 62px;
+  text-align: center;
+  font-style: italic;
+  padding-top: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  flex-shrink: 0;
+}
+
+address {
+  font-style: normal;
+  margin-top: 10px;
+}
