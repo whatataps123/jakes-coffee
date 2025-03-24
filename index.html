@@ -5,49 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Jake's Coffee Shop</title>
+    <script>
+      const pages = {
+        home: {
+          title: "Welcome to Jake's Coffee Shop",
+          content: `
+            <section>
+              <p>Come in and experience...</p>
+              <img
+                id="CoffeePic"
+                class="floatright"
+                src="./assets/coffee.jpg"
+                alt="coffee cup"
+                width="200"
+                height="200"
+              />
+              <ul>
+                <li>Specialty Coffee and Tea</li>
+                <li>Freshly made sandwiches</li>
+                <li>Bagels, Muffins, and Organic Snacks</li>
+                <li>Music and Poetry Readings</li>
+                <li>Open mic nights</li>
+                <li>...</li>
+              </ul>
+            </section>
+            <section>
+              <address>
+                23 Pine Road <br />
+                Nottingham, NG1 5YU <br />
+                0115 9324567
+              </address>
+            </section>
+          `
+        },
+        menu: {
+          title: "Our Menu",
+          content: `
+            <section>
+              <h2>Our Menu</h2>
+              <ul>
+                <li><strong>Espresso:</strong> $2.50</li>
+                <li><strong>Latte:</strong> $3.50</li>
+                <li><strong>Cappuccino:</strong> $3.75</li>
+                <li><strong>Mocha:</strong> $4.00</li>
+                <li><strong>Tea:</strong> $2.00</li>
+                <li><strong>Bagel with Cream Cheese:</strong> $2.50</li>
+                <li><strong>Blueberry Muffin:</strong> $2.75</li>
+                <li><strong>Turkey Sandwich:</strong> $5.50</li>
+              </ul>
+            </section>
+          `
+        },
+        music: {
+          title: "Live Music",
+          content: `
+            <section>
+              <h2>Live Music</h2>
+              <p>Join us for live music performances every Friday and Saturday night!</p>
+            </section>
+          `
+        },
+        jobs: {
+          title: "Career Opportunities",
+          content: `
+            <section>
+              <h2>Careers</h2>
+              <p>We are always looking for passionate individuals to join our team. Contact us for more information!</p>
+            </section>
+          `
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const contentElement = document.getElementById('content');
+        const navLinks = document.querySelectorAll('.navBar');
+        const yearElement = document.getElementById('current-year');
+        
+        yearElement.textContent = new Date().getFullYear();
+        
+        function loadPage(pageName) {
+          const page = pages[pageName] || pages.home;
+          document.title = `${page.title} - Jake's Coffee Shop`;
+          contentElement.innerHTML = page.content;
+          updateActiveNav(pageName);
+          sessionStorage.setItem('currentPage', pageName);
+        }
+        
+        function updateActiveNav(pageName) {
+          navLinks.forEach(link => {
+            if (link.dataset.page === pageName) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+        
+        document.getElementById('main-nav').addEventListener('click', event => {
+          const target = event.target;
+          if (target.classList.contains('navBar')) {
+            event.preventDefault();
+            loadPage(target.dataset.page);
+          }
+        });
+        
+        const savedPage = sessionStorage.getItem('currentPage');
+        loadPage(savedPage || 'home');
+      });
+    </script>
   </head>
   <body>
     <header>
       <h1>Jake's Coffee Shop</h1>
     </header>
     <div class="container">
-      <nav>
-        <a class="navBar" href="/">Home</a>
-        <a class="navBar" href="menu.html">Menu</a>
-        <a class="navBar" href="music.html">Music</a>
-        <a class="navBar" href="jobs.html">Jobs</a>
+      <nav id="main-nav">
+        <a class="navBar active" data-page="home">Home</a>
+        <a class="navBar" data-page="menu">Menu</a>
+        <a class="navBar" data-page="music">Music</a>
+        <a class="navBar" data-page="jobs">Jobs</a>
       </nav>
-    <main>
-      <section>
-        <p>Come in and experience...</p>
-        <img
-          id="CoffeePic"
-          class="floatright"
-          src=".\assets\coffee.jpg"
-          alt="coffee cup"
-          width="200"
-          height="200"
-        />
-        <ul>
-          <li>Specialty Coffee and Tea</li>
-          <li>Freshly made sandwiches</li>
-          <li>Bagels, Muffins, and Organic Snacks</li>
-          <li>Music and Poetry Readings</li>
-          <li>Open mic nights</li>
-          <li>...</li>
-        </ul>
-      </section>
-      <section>
-        <address>
-          23 Pine Road <br />
-          Nottingham, NG1 5YU <br />
-          0115 9324567
-        </address>
-      </section>
-    </main>
-  </div>
+      <main id="content"></main>
+    </div>
     <footer>
-      Copyright &copy; 2011 Jake's Coffee House<br />
+      Copyright &copy; <span id="current-year">2011</span> Jake's Coffee House<br />
       <a href="mailto:jake@jcoffee.com">jake@jcoffee.com</a>
     </footer>
   </body>
